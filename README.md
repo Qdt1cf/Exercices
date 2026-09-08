@@ -49,17 +49,34 @@ Pour afficher une liste de QR code qui envoie sur les solutions, on a la command
 Chaque exercice a la structure suivante : 
 
 ```
-\uuid{}
-\titre{}
-\theme{}
+\uuid{{ID}}
+\titre{ {TITRE} }
+
+\niveau{} 				%L1, L2, L3, MPSI, MP, PCSI, PC, PSI...
+\module{ {MODULE} } 	%Analyse, Algèbre...
+\chapitre{}   			%Continuité, Groupes, Fonctions de plusieurs variables...
+\sousChapitre{}			%Optimisation, Diagonalisation d'une matrice, Calcul de dérivées partielles...
+
+\theme{}				%Fonction de répartition, Division euclidienne de polynômes, ...
 \auteur{}
-\datecreate{}
-\organisation{}
+\datecreate{ {YYYY-MM-DD}}
+\organisation{}			%AMSCC, Exo7, ...
+\difficulte{}			%1, 2, 3, 4 ou 5
 
 \contenu{
-  \texte{}
-  \question{}
-  \reponse{}
+
+\texte{ 
+}
+
+\begin{enumerate}
+\item   \question{}
+\indication{}
+\reponse{}
+\item   \question{}
+\indication{}
+
+\end{enumerate}
+
 }
 ```
 
@@ -69,3 +86,29 @@ Les questions /réponses peuvent être agencées par exemple dans une structure 
 Dans le répertoire /pdf, on trouve :
 - latex : chaque exercice est appelé dans un fichier compilable (standalone) individuel
 - pdf : le résultat après exécution de pdflatex
+
+## Documentation du Makefile
+Le `Makefile` sert à compiler automatiquement les figures TikZ présentes dans `img/tikz/` (fichiers `*-tikz-*.tex`) vers :
+- `img/pdf/` pour les PDF
+- `img/svg/` pour les SVG
+
+Le préambule utilisé est `img/tikz/_standalone_preamble.tex`.  
+Chaque compilation construit un fichier temporaire `*_tmp.tex`, lance `lualatex` (et `dvisvgm` pour les SVG), puis nettoie les fichiers temporaires.
+
+### Prérequis
+- `make`
+- `lualatex`
+- `dvisvgm` (uniquement pour la cible SVG)
+
+### Commandes principales
+- `make` ou `make figures` : compile toutes les figures en PDF
+- `make svg` : compile toutes les figures en SVG
+- `make fig UUID=<id> N=<n>` : compile une figure PDF (`<id>-tikz-<n>.tex`)
+- `make fig-svg UUID=<id> N=<n>` : compile une figure SVG
+- `make list` : liste les sources TikZ et les sorties déjà générées
+- `make clean` : supprime les fichiers temporaires
+- `make cleanall` : supprime aussi tous les PDF/SVG générés
+- `make rebuild` : nettoyage complet puis recompilation PDF
+- `make rebuild-svg` : nettoyage complet puis recompilation SVG
+- `make debug` : affiche les variables internes calculées par le `Makefile`
+- `make help` : affiche l’aide intégrée

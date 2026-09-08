@@ -1,17 +1,22 @@
-\chapitre{Probabilité continue}
-\sousChapitre{Loi normale}
 \uuid{lz1J}
+\chapitre{Probabilité continue}
+\niveau{L2}
+\module{Probabilité et statistique}
+\sousChapitre{Loi normale}
 \titre{Démonstrations de cours pour la loi normale}
 \theme{loi normale, variables aléatoires à densité}
 \auteur{Maxime NGUYEN}
 \datecreate{2022-10-17}
 \organisation{AMSCC}
+\difficulte{}
 \contenu{
 
 
 \texte{ Soit $X$ une variable aléatoire dont la loi est déterminée par la fonction densité définie pour tout $x \in \R$ par : $$
 	f_X(x)=\frac{1}{\sigma \sqrt{2 \pi}} \exp \left[-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right]
-	$$ }
+	$$ 
+avec $\mu \in \R$ et $\sigma >0$ fixés. 
+}
 
 \begin{enumerate}
 \item \question{ A l'aide d'un changement de variable, calculer $\mathbb{E}(X)$. }
@@ -42,6 +47,8 @@
 	$$ }
 
 \item \question{ Soit $Z = \frac{X-\mu}{\sigma}$. Déterminer la loi de $Z$. }
+
+\indication{ On peut exprimer la fonction de répartition de $Z$ et retrouver la densité d'une loi normale centrée réduite après dérivation. }
 
 \reponse{ En effectuant toujours le même changement de variables $u=\frac{x-\mu}{\sigma}$, on a pour tout réel $t$ :
 	$$
